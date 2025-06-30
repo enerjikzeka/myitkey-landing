@@ -1,10 +1,723 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>Benim Web Sitem test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myitkey - IT Danışmanlık ve Yazılım Hizmetleri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #fbbf24;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid #3b82f6;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        .service-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fbbf24;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Merhaba Dünya!</h1>
-    <p>Bu benim GitHub Pages sitemi23.</p>
+    <header>
+        <nav>
+            <div class="logo">MyITKey</div>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>IT Başarınızın Anahtarı</h1>
+            <p>Şirketinizin teknoloji altyapısını optimize ederek, rekabet avantajı kazanmanızı sağlayoruz. Profesyonel IT danışmanlık ve yazılım çözümleri ile işletmenizi geleceğe taşıyoruz.</p>
+            <a href="#contact" class="cta-button">Ücretsiz Danışmanlık Alın</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Hizmetlerimiz</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">💻</div>
+                    <h3>IT Altyapı Danışmanlığı</h3>
+                    <p>Mevcut IT altyapınızı analiz ederek, performans ve güvenlik açısından optimizasyon önerileri sunuyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">⚡</div>
+                    <h3>Sistem Optimizasyonu</h3>
+                    <p>Yavaş çalışan sistemlerinizi hızlandırarak, verimliliği artıran çözümler geliştiriyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🔒</div>
+                    <h3>Siber Güvenlik</h3>
+                    <p>İşletmenizi siber tehditlere karşı korumak için kapsamlı güvenlik çözümleri sunuyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">☁️</div>
+                    <h3>Bulut Çözümleri</h3>
+                    <p>İş süreçlerinizi bulut teknolojileriyle modernize ederek, maliyet tasarrufu sağlıyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">📱</div>
+                    <h3>Özel Yazılım Geliştirme</h3>
+                    <p>İhtiyaçlarınıza özel yazılım çözümleri geliştirerek, rekabet avantajı kazandırıyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🔧</div>
+                    <h3>Teknik Destek</h3>
+                    <p>7/24 teknik destek hizmetimizle, IT sorunlarınızı hızla çözüme kavuşturuyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>Teknoloji Partneri Olarak Yanınızdayız</h2>
+                    <p>MyITKey olarak, IT altyapısı konusunda yetersizlik yaşayan şirketlerin dijital dönüşüm sürecinde güvenilir partneri olmayı hedefliyoruz.</p>
+                    <p>Deneyimli ekibimiz ile şirketinizin teknoloji ihtiyaçlarını analiz ediyor, en uygun çözümleri sunuyoruz. Amacımız, teknoloji altyapınızı güçlendirerek işletmenizin büyümesine katkıda bulunmaktır.</p>
+                    <p>Sektördeki uzun yılların deneyimi ve sürekli gelişen teknoloji trendlerini takip etme yaklaşımımızla, işletmenizi geleceğe hazırlıyoruz.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="IT Danışmanlık Ekibi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <h3>100+</h3>
+                    <p>Başarılı Proje</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>50+</h3>
+                    <p>Mutlu Müşteri</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>5+</h3>
+                    <p>Yıllık Deneyim</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>24/7</h3>
+                    <p>Teknik Destek</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">İletişime Geçin</h2>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Bizimle İletişime Geçin</h3>
+                    <div class="contact-item">
+                        <i>📞</i>
+                        <div>
+                            <strong>Telefon</strong><br>
+                            +90 (212) 555 0123
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <div>
+                            <strong>E-posta</strong><br>
+                            info@myitkey.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <div>
+                            <strong>Adres</strong><br>
+                            Maslak Mahallesi, Bilişim Sokak No:1<br>
+                            Sarıyer, İstanbul
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>🕒</i>
+                        <div>
+                            <strong>Çalışma Saatleri</strong><br>
+                            Pazartesi - Cuma: 09:00 - 18:00<br>
+                            Acil durumlar: 7/24 destek
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- EmailJS İletişim Formu -->
+                <form class="contact-form fade-in" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Adınız Soyadınız</label>
+                        <input type="text" id="name" name="name" required placeholder="Adınız ve soyadınız">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-posta Adresiniz</label>
+                        <input type="email" id="email" name="email" required placeholder="email@ornegi.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Şirket Adı</label>
+                        <input type="text" id="company" name="company" placeholder="Şirket adınız">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Konu</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Mesaj konusu">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mesajınız</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Mesajınızı detaylı olarak yazın..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span id="btn-text">📧 Mesaj Gönder</span>
+                        <span id="btn-loading" style="display: none;">
+                            <span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span>
+                            Gönderiliyor...
+                        </span>
+                    </button>
+                    
+                    <div style="margin-top: 1rem; padding: 1rem; background: #f0f9ff; border-radius: 8px;">
+                        <p style="margin: 0; color: #1e40af; font-size: 0.9rem;">
+                            <strong>🔒 Güvenli:</strong> EmailJS ile otomatik mail gönderimi<br>
+                            <strong>⚡ Hızlı:</strong> Direkt gelen kutunuza ulaşır<br>
+                            <strong>📱 Mobil Uyumlu:</strong> Tüm cihazlarda çalışır
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MyITKey. Tüm hakları saklıdır. | IT Danışmanlık ve Yazılım Hizmetleri</p>
+        </div>
+    </footer>
+
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <script>
+        // EmailJS Configuration - Bu bilgileri EmailJS dashboard'dan alın
+        const EMAILJS_CONFIG = {
+            publicKey: "phNNSrh_QQNoS2cBh",      // emailjs.com/admin/account → API Keys → Public Key
+            serviceId: "service_ktqb8ro",      // emailjs.com/admin/services → Service ID
+            templateId: "template_4rfqk2i"     // emailjs.com/admin/templates → Template ID
+        };
+
+        // EmailJS Initialization
+        (function(){
+            emailjs.init(EMAILJS_CONFIG.publicKey);
+        })();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // EmailJS Form Handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            
+            // Form validation
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                alert('⚠️ Lütfen tüm zorunlu alanları doldurun.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('⚠️ Lütfen geçerli bir e-posta adresi girin.');
+                return;
+            }
+            
+            // Loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-block';
+            
+            // EmailJS send
+            emailjs.sendForm(
+                EMAILJS_CONFIG.serviceId, 
+                EMAILJS_CONFIG.templateId, 
+                '#contact-form'
+            ).then(function(response) {
+                console.log('✅ SUCCESS!', response.status, response.text);
+                
+                // Success state
+                btnLoading.style.display = 'none';
+                btnText.innerHTML = '✅ Gönderildi!';
+                btnText.style.display = 'inline-block';
+                submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                
+                alert('✅ Mesajınız başarıyla gönderildi!\n\nEn kısa sürede size dönüş yapacağız.\nTeşekkür ederiz! 🙏');
+                
+                // Reset form
+                document.getElementById('contact-form').reset();
+                
+                // Reset button after 5 seconds
+                setTimeout(() => {
+                    btnText.innerHTML = '📧 Mesaj Gönder';
+                    submitBtn.style.background = 'linear-gradient(45deg, #3b82f6, #1e3a8a)';
+                    submitBtn.disabled = false;
+                }, 5000);
+                
+            }).catch(function(error) {
+                console.log('❌ FAILED...', error);
+                
+                // Error state
+                btnLoading.style.display = 'none';
+                btnText.innerHTML = '❌ Hata Oluştu';
+                btnText.style.display = 'inline-block';
+                submitBtn.style.background = 'linear-gradient(45deg, #ef4444, #dc2626)';
+                
+                alert('❌ Mesaj gönderilemedi!\n\nMuhtemel sebepler:\n• EmailJS ayarları eksik veya yanlış\n• İnternet bağlantısı sorunu\n• Gmail API yetkilendirme hatası\n\nGeçici çözüm için telefon ile iletişime geçin:\n📞 +90 (212) 555 0123');
+                
+                // Reset button after 5 seconds
+                setTimeout(() => {
+                    btnText.innerHTML = '📧 Mesaj Gönder';
+                    submitBtn.style.background = 'linear-gradient(45deg, #3b82f6, #1e3a8a)';
+                    submitBtn.disabled = false;
+                }, 5000);
+            });
+        });
+
+        // Add floating animation to service cards
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
 </body>
 </html>
